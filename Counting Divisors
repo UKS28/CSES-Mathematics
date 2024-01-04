@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define rep(k,z) for(int i=k;i<z;i++)
+#define ll  long long int
+const ll MOD=1e9+7;
+
+vector<ll> seive(1e6+10,1);
+int main()
+{
+  ll tc;
+  cin>>tc;
+  for(int i=1;i<1e6+10;i++)
+  {
+    for(int j=2;i*j<1e6+10;j++)
+         seive[i*j]++;
+  }
+ 
+  while(tc--)
+  {
+   ll n;
+   cin>>n;
+   cout<<seive[n]<<endl;
+  }  
+    
+}
