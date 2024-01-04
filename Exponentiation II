@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define rep(k,z) for(int i=k;i<z;i++)
+#define ll  long long int
+const ll MOD=1e9+7;
+//https://www.geeksforgeeks.org/find-power-power-mod-prime/ 
+ll compute_power(ll a,ll b,ll mod)
+{
+    ll ans=1;
+    while(b>0)
+    {
+        if(b%2)
+        (ans*=a)%=mod;
+ 
+        b/=2;
+        (a*=a)%=mod;
+    }
+ 
+    return ans;
+}
+ 
+int main()
+{
+  ll tc;
+  cin>>tc;
+  while(tc--)
+  {
+    ll a,b,c;
+    cin>>a>>b>>c;
+    ll BpowC=compute_power(b,c,MOD-1);
+    ll res=compute_power(a,BpowC,MOD);    
+    cout<<res<<endl;
+  }  
+    
+}
