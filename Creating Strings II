@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define rep(k,z) for(int i=k;i<z;i++)
+#define ll  long long int
+const ll MOD=1e9+7;
+vector<ll> fact(3e6+10,1);
+vector<ll> inversefact (3e6+10,1);
+ 
+ll modularBinaryExponentiation(ll base,ll exp)
+{
+    if(exp==0) return 1;
+    ll res=modularBinaryExponentiation(base,exp/2);
+    if(exp%2==1)
+    return (((res*res)%MOD)*base)%MOD;
+  
+    return (res*res)%MOD;
+    
+}
+ 
+void calc()
+{
+    fact[0]=fact[1]=1;
+    inversefact[0]=inversefact[1]=1;
+    for(ll i=2;i<fact.size();i++)
+    {
+      fact[i]=((fact[i-1])%MOD*i)%MOD;
+      inversefact[i]= modularBinaryExponentiation(fact[i],MOD-2);
+    }
+}
+ 
+int main()
+{
+   calc();
+   string s;
+   cin>>s;
+   ll n=s.length();
+   vector<ll> count(26);
+   for(auto &itr:s)
+       count[itr-'a']++;
+   ll ans=fact[n];
+   for(ll &itr:count)
+     (ans*=inversefact[itr])%=MOD;
+   cout<<ans<<endl;  
+}
