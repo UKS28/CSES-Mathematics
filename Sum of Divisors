@@ -12,8 +12,11 @@ int main()
   ll mod_inv_2=500000004;
   for(ll i=1,j,q;i<=n;i=j)
   {
+    // quotient :n/i
     q=n/i;
+    // next block j=n/q +1
     j=n/q+1;
+    // ans+ = (j*(j-1)/2 - i*(i-1)/2 )* q
     ll sum_upto_jminus1=(((j%MOD)*((j-1)%MOD))%MOD*mod_inv_2)%MOD;
     ll sum_upto_iminus1=(((i%MOD)*((i-1)%MOD))%MOD*mod_inv_2)%MOD;
     ans=(ans+(((sum_upto_jminus1 - sum_upto_iminus1 + MOD)%MOD)*q)%MOD)%MOD;
