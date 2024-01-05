@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define rep(k,z) for(int i=k;i<z;i++)
+#define ll  long long int
+const ll MOD=1e9+7;
+ 
+int main()
+{
+  ll n;
+  cin>>n;
+  ll ans=0;
+  ll mod_inv_2=500000004;
+  for(ll i=1,j,q;i<=n;i=j)
+  {
+    q=n/i;
+    j=n/q+1;
+    ll sum_upto_jminus1=(((j%MOD)*((j-1)%MOD))%MOD*mod_inv_2)%MOD;
+    ll sum_upto_iminus1=(((i%MOD)*((i-1)%MOD))%MOD*mod_inv_2)%MOD;
+    ans=(ans+(((sum_upto_jminus1 - sum_upto_iminus1 + MOD)%MOD)*q)%MOD)%MOD;
+  }
+  cout<<ans<<endl;
+}
