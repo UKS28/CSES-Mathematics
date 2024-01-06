@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define rep(k,z) for(int i=k;i<z;i++)
+#define ll  long long int
+const ll MOD=1e9+7;
+ //Hint : https://www.youtube.com/watch?v=EEb6JP3NXBI
+
+vector<vector<ll>> multiply (vector<vector<ll>> &v1,vector<vector<ll>> &v2)
+{
+    vector<vector<ll>> res={{1,0},{0,1}};
+    res[0][0]=((v1[0][0]*v2[0][0])%MOD+(v1[0][1]*v2[1][0])%MOD)%MOD;
+    res[0][1]=((v1[0][0]*v2[0][1])%MOD+(v1[0][1]*v2[1][1])%MOD)%MOD;
+    res[1][0]=((v1[1][0]*v2[0][0])%MOD+(v1[1][1]*v2[1][0])%MOD)%MOD;
+    res[1][1]=((v1[1][0]*v2[0][1])%MOD+(v1[1][1]*v2[1][1])%MOD)%MOD;
+    return res;
+}
+ 
+vector<vector<ll>> matrixExponentiation(vector<vector<ll>> &V ,unsigned ll y )     //x^y  { time : log n }
+{
+    vector<vector<ll>> res = {{1,0},{0,1}}; // Initialize result
+    while (y > 0) {
+        // If y is odd, multiply x with result
+        if (y & 1)
+            // res = (res * x)%mod;
+            res= multiply(res,V);
+        // y must be even now
+        y = y >> 1;       // y = y/2
+        V = multiply(V,V);  // Change x to x^2
+    }
+    return res;
+}
+ 
+int main()
+{
+    ll n;
+    cin>>n;
+    if(n==0 || n==1)
+    {
+        cout<<n<<endl;
+        return 0;
+    }
+
+    vector<vector<ll>> v={{1,1},{1,0}};
+    vector<vector<ll>> res= matrixExponentiation(v,n-1);
+    ll ans=  (res[0][0])%MOD;
+    cout<<ans<<endl; 
+}
